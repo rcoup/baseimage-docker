@@ -1,5 +1,5 @@
-FROM ubuntu:14.04
-MAINTAINER Phusion <info@phusion.nl>
+FROM ubuntu:lucid
+MAINTAINER Robert Coup <robert.coup@koordinates.com>
 
 ENV HOME /root
 ADD . /build

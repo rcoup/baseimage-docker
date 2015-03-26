@@ -4,9 +4,9 @@ source /build/buildconfig
 set -x
 
 ## Temporarily disable dpkg fsync to make building faster.
-if [[ ! -e /etc/dpkg/dpkg.cfg.d/docker-apt-speedup ]]; then
-	echo force-unsafe-io > /etc/dpkg/dpkg.cfg.d/docker-apt-speedup
-fi
+#if [[ ! -e /etc/dpkg/dpkg.cfg.d/docker-apt-speedup ]]; then
+#	echo force-unsafe-io > /etc/dpkg/dpkg.cfg.d/docker-apt-speedup
+#fi
 
 ## Prevent initramfs updates from trying to run grub and lilo.
 ## https://journal.paul.querna.org/articles/2013/10/15/docker-ubuntu-on-rackspace/
@@ -36,7 +36,11 @@ ln -sf /bin/true /usr/bin/ischroot
 $minimal_apt_get_install apt-transport-https ca-certificates
 
 ## Install add-apt-repository
-$minimal_apt_get_install software-properties-common
+$minimal_apt_get_install python-software-properties
+
+## Install python3
+$minimal_apt_get_install python3 python3-setuptools
+easy_install3 argparse
 
 ## Upgrade all packages.
 apt-get dist-upgrade -y --no-install-recommends
